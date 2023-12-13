@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	class="light-style layout-menu-fixed layout-compact"
+	dir="ltr"
+	data-theme="theme-default"
+	data-assets-path="assets/"
+	data-template="horizontal-menu-template"
+>
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+		/>
+
+		<title>Smart Lamp | Kendali</title>
+
+		<!-- Favicon -->
+		<link
+			rel="icon"
+			type="image/x-icon"
+			href="https://demos.pixinvent.com/vuexy-html-admin-template/assets/img/favicon/favicon.ico"
+		/>
+
+		<!-- Fonts -->
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com/"
+		/>
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com/"
+			crossorigin
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Icons -->
+		<link
+			rel="stylesheet"
+			href="assets/vendor/fonts/fontawesome.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/fonts/tabler-icons.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/fonts/flag-icons.css"
+		/>
+
+		<!-- Core CSS -->
+		<link
+			rel="stylesheet"
+			href="assets/vendor/css/rtl/core.css"
+			class="template-customizer-core-css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/css/rtl/theme-default.css"
+			class="template-customizer-theme-css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/css/demo.css"
+		/>
+
+		<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		<!-- cdn -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase.js"></script>
+
+		<!-- iziToast CSS -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
+		/>
+
+		<!-- iziToast JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+
+		<!-- Vendors CSS -->
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/node-waves/node-waves.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/typeahead-js/typeahead.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/apex-charts/apex-charts.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/swiper/swiper.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css"
+		/>
+
+		<!-- Page CSS -->
+		<link
+			rel="stylesheet"
+			href="assets/vendor/css/pages/cards-advance.css"
+		/>
+
+		<!-- Helpers -->
+		<script src="assets/vendor/js/helpers.js"></script>
+
+		<script src="assets/js/login.js"></script>
+		<script src="assets/js/lampu.js"></script>
+
+		<script src="assets/js/config.js"></script>
+
+		<script>
+			// Function to update the navbar with the user's email
+			function updateNavbarWithEmail(user) {
+				if (user) {
+					var userEmail = user.email
+					var userDisplayName = user.displayName || 'User'
+					var userProfilePicture =
+						user.photoURL ||
+						'https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg'
+					if (userEmail) {
+						document.getElementById('user-email').textContent = userEmail
+					}
+					if (userDisplayName) {
+						document.getElementById('user-display-name').textContent =
+							userDisplayName
+					}
+
+					if (userProfilePicture) {
+						var userAvatar = document.getElementById('user-avatar')
+						userAvatar.src = userProfilePicture
+						userAvatar.alt = 'User Avatar'
+					}
+					if (userProfilePicture) {
+						var userAvatar = document.getElementById('user-avatar2')
+						userAvatar.src = userProfilePicture
+						userAvatar.alt = 'User Avatar'
+					}
+				}
+			}
+
+			// Check if the user is authenticated
+			firebase.auth().onAuthStateChanged(function (user) {
+				if (user) {
+					// User is signed in
+					updateNavbarWithEmail(user)
+				} else {
+					// User is not signed in, redirect to index.html
+					window.location.href = 'auth-login.html'
+				}
+			})
+		</script>
+
+		<style>
+			/* Customize the size of the Bootstrap toggle switch */
+			.form-switch .form-check-input {
+				width: 60px;
+				/* Set the width */
+				height: 30px;
+				/* Set the height */
+			}
+
+			/* Customize the size of the slider (round part) */
+			.form-switch .form-check-input:checked + .slider::before {
+				width: 28px;
+				height: 28px;
+			}
+
+			/* Customize the size of the slider (round part) */
+			.form-switch .form-check-input:focus + .slider::before {
+				width: 28px;
+				height: 28px;
+			}
+
+			/* Style radio button container */
+			.radio-container {
+				display: inline-block;
+				position: relative;
+				padding-left: 30px;
+				margin-right: 15px;
+				cursor: pointer;
+			}
+
+			/* Style the actual radio button */
+			.radio-container input[type='radio'] {
+				display: none;
+				/* Sembunyikan radio button bawaan */
+			}
+
+			/* Style the custom radio button */
+			.custom-radio {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 20px;
+				width: 20px;
+				background-color: #fff;
+				border: 2px solid #007bff;
+				border-radius: 50%;
+			}
+
+			/* Style the custom radio button when selected */
+			.radio-container input[type='radio']:checked + .custom-radio::before {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 10px;
+				height: 10px;
+				background-color: #007bff;
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Layout wrapper -->
+		<div
+			class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu"
+		>
+			<div class="layout-container">
+				<!-- Navbar -->
+				<nav
+					class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme"
+					id="layout-navbar"
+				>
+					<div class="container-xxl">
+						<div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
+							<a
+								href="index.html"
+								class="app-brand-link gap-2"
+							>
+								<span class="app-brand-logo demo">
+									<svg
+										width="32"
+										height="22"
+										viewBox="0 0 32 22"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
+											fill="#7367F0"
+										/>
+										<path
+											opacity="0.06"
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
+											fill="#161616"
+										/>
+										<path
+											opacity="0.06"
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
+											fill="#161616"
+										/>
+										<path
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
+											fill="#7367F0"
+										/>
+									</svg>
+								</span>
+								<span class="app-brand-text demo menu-text fw-bold"
+									>Smart Lamp</span
+								>
+							</a>
+							<a
+								href="javascript:void(0);"
+								class="layout-menu-toggle menu-link text-large ms-auto d-xl-none"
+							>
+								<i class="ti ti-x ti-sm align-middle"></i>
+							</a>
+						</div>
+						<div
+							class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none"
+						>
+							<a
+								class="nav-item nav-link px-0 me-xl-4"
+								href="javascript:void(0)"
+							>
+								<i class="ti ti-menu-2 ti-sm"></i>
+							</a>
+						</div>
+						<div
+							class="navbar-nav-right d-flex align-items-center"
+							id="navbar-collapse"
+						>
+							<ul class="navbar-nav flex-row align-items-center ms-auto">
+								<!-- Style Switcher -->
+								<li
+									class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0"
+								>
+									<a
+										class="nav-link dropdown-toggle hide-arrow"
+										href="javascript:void(0);"
+										data-bs-toggle="dropdown"
+									>
+										<i class="ti ti-md"></i>
+									</a>
+									<ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+										<li>
+											<a
+												class="dropdown-item"
+												href="javascript:void(0);"
+												data-theme="light"
+											>
+												<span class="align-middle"
+													><i class="ti ti-sun me-2"></i>Light</span
+												>
+											</a>
+										</li>
+										<li>
+											<a
+												class="dropdown-item"
+												href="javascript:void(0);"
+												data-theme="dark"
+											>
+												<span class="align-middle"
+													><i class="ti ti-moon me-2"></i>Dark</span
+												>
+											</a>
+										</li>
+										<li>
+											<a
+												class="dropdown-item"
+												href="javascript:void(0);"
+												data-theme="system"
+											>
+												<span class="align-middle"
+													><i class="ti ti-device-desktop me-2"></i>System</span
+												>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<!-- / Style Switcher-->
+
+								<!-- User -->
+								<li class="nav-item navbar-dropdown dropdown-user dropdown">
+									<a
+										class="nav-link dropdown-toggle hide-arrow"
+										href="javascript:void(0);"
+										data-bs-toggle="dropdown"
+									>
+										<div class="avatar avatar-online">
+											<img
+												src=""
+												alt
+												class="h-auto rounded-circle"
+												id="user-avatar"
+											/>
+										</div>
+									</a>
+									<ul class="dropdown-menu dropdown-menu-end">
+										<li>
+											<a
+												class="dropdown-item"
+												href="pages-account-settings-account.html"
+											>
+												<div class="d-flex">
+													<div class="flex-shrink-0 me-3">
+														<div class="avatar avatar-online">
+															<img
+																src=""
+																alt
+																class="h-auto rounded-circle"
+																id="user-avatar2"
+															/>
+														</div>
+													</div>
+													<div class="flex-grow-1">
+														<span
+															class="fw-medium d-block"
+															id="user-email"
+														></span>
+														<small
+															class="text-muted"
+															id="user-display-name"
+														></small>
+													</div>
+												</div>
+											</a>
+										</li>
+										<li>
+											<div class="dropdown-divider"></div>
+										</li>
+										<li>
+											<a
+												class="dropdown-item"
+												href="auth-login.html"
+											>
+												<i class="ti ti-logout me-2 ti-sm"></i>
+												<span class="align-middle">Log Out</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<!--/ User -->
+							</ul>
+						</div>
+					</div>
+				</nav>
+				<!-- / Navbar -->
+
+				<!-- Layout container -->
+				<div class="layout-page">
+					<!-- Content wrapper -->
+					<div class="content-wrapper">
+						<!-- Menu -->
+						<aside
+							id="layout-menu"
+							class="layout-menu-horizontal menu-horizontal menu bg-menu-theme flex-grow-0"
+						>
+							<div class="container-xxl d-flex h-100">
+								<ul class="menu-inner">
+									<!-- Dashboards -->
+									<li class="menu-item">
+										<a
+											href="index.html"
+											class="menu-link"
+										>
+											<i class="menu-icon tf-icons ti ti-smart-home"></i>
+											Dashboard
+										</a>
+									</li>
+
+									<!-- Layouts -->
+									<li class="menu-item">
+										<a
+											href="#"
+											class="menu-link menu-toggle"
+										>
+											<i class="menu-icon tf-icons ti ti-database"></i>
+											Data
+										</a>
+
+										<ul class="menu-sub">
+											<li class="menu-item">
+												<a
+													href="dataset.html"
+													class="menu-link"
+												>
+													<i class="menu-icon tf-icons ti ti-menu-2"></i>
+													Dataset Lampu
+												</a>
+											</li>
+											<li class="menu-item">
+												<a
+													href="train.html"
+													class="menu-link"
+												>
+													<i
+														class="menu-icon tf-icons ti ti-layout-distribute-vertical"
+													></i>
+													Data Latih
+												</a>
+											</li>
+										</ul>
+									</li>
+
+									<!-- Apps -->
+									<li class="menu-item active">
+										<a
+											href="kendali.html"
+											class="menu-link"
+										>
+											<i class="menu-icon tf-icons ti ti-device-remote"></i>
+											Kendali
+										</a>
+									</li>
+
+									<!-- Pages -->
+									<li class="menu-item">
+										<a
+											href="evaluasi.html"
+											class="menu-link"
+										>
+											<i class="menu-icon tf-icons ti ti-book-filled"></i>
+											Evaluasi Model
+										</a>
+									</li>
+
+									<li class="menu-item">
+										<a
+											href="tree.html"
+											class="menu-link"
+										>
+											<i class="menu-icon tf-icons ti ti-tree"></i>
+											Pohon Keputusan
+										</a>
+									</li>
+								</ul>
+							</div>
+						</aside>
+						<!-- / Menu -->
+
+						<!-- Content -->
+
+						<div class="container-xxl flex-grow-1 container-p-y">
+							<h1>Pilih Mode Kendali</h1>
+							<label class="radio-container"
+								>Manual Mode
+								<input
+									type="radio"
+									id="manualRadio"
+									name="mode"
+									value="manual"
+									onchange="toggleMode()"
+								/>
+								<span class="custom-radio"></span>
+							</label>
+							<label class="radio-container"
+								>Automation Mode
+								<input
+									type="radio"
+									id="automationRadio"
+									name="mode"
+									value="automation"
+									onchange="toggleMode()"
+								/>
+								<span class="custom-radio"></span>
+							</label>
+
+							<div
+								id="manualMode"
+								style="display: none"
+							>
+								<div class="row">
+									<div class="col-md-6 col-xl-4 mb-4">
+										<div class="card h-100">
+											<div class="card-body">
+												<div
+													class="bg-label-primary rounded-3 text-center mb-3 pt-4"
+												>
+													<img
+														class="lampu-kamar"
+														alt="lampu"
+														width="140"
+													/>
+												</div>
+												<h4 class="mb-2 pb-1">Kamar Utama</h4>
+												<div class="form-check form-switch">
+													<input
+														class="form-check-input"
+														type="checkbox"
+														role="switch"
+														id="toggleSwitch"
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-6 col-xl-4 mb-4">
+										<div class="card h-100">
+											<div class="card-body">
+												<div
+													class="bg-label-primary rounded-3 text-center mb-3 pt-4"
+												>
+													<img
+														class="lampu-kamar2"
+														alt="lampu-kamar2"
+														width="140"
+													/>
+												</div>
+												<h4 class="mb-2 pb-1">Kamar Kedua</h4>
+												<div class="form-check form-switch">
+													<input
+														class="form-check-input"
+														type="checkbox"
+														role="switch"
+														id="toggleSwitch2"
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-xl-4 mb-4">
+										<div class="card h-100">
+											<div class="card-body">
+												<div
+													class="bg-label-primary rounded-3 text-center mb-3 pt-4"
+												>
+													<img
+														class="lampu-tamu"
+														alt="lampu"
+														width="140"
+													/>
+												</div>
+												<h4 class="mb-2 pb-1">Ruang Tamu</h4>
+												<div class="form-check form-switch">
+													<input
+														class="form-check-input"
+														type="checkbox"
+														role="switch"
+														id="toggleSwitch3"
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-xl-4 mb-4">
+										<div class="card h-100">
+											<div class="card-body">
+												<div
+													class="bg-label-primary rounded-3 text-center mb-3 pt-4"
+												>
+													<img
+														class="lampu-teras"
+														alt="lampu"
+														width="140"
+													/>
+												</div>
+												<h4 class="mb-2 pb-1">Teras</h4>
+												<div class="form-check form-switch">
+													<input
+														class="form-check-input"
+														type="checkbox"
+														role="switch"
+														id="toggleSwitch4"
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-xl-4 mb-4">
+										<div class="card h-100">
+											<div class="card-body">
+												<div
+													class="bg-label-primary rounded-3 text-center mb-3 pt-4"
+												>
+													<img
+														class="lampu-dapur"
+														alt="lampu"
+														width="140"
+													/>
+												</div>
+												<h4 class="mb-2 pb-1">Dapur</h4>
+												<div class="form-check form-switch">
+													<input
+														class="form-check-input"
+														type="checkbox"
+														role="switch"
+														id="toggleSwitch5"
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-xl-4 mb-4">
+										<div class="card h-100">
+											<div class="card-body">
+												<div
+													class="bg-label-primary rounded-3 text-center mb-3 pt-4"
+												>
+													<img
+														class="lampu-toilet"
+														alt="lampu"
+														width="140"
+													/>
+												</div>
+												<h4 class="mb-2 pb-1">Toilet</h4>
+												<div class="form-check form-switch">
+													<input
+														class="form-check-input"
+														type="checkbox"
+														role="switch"
+														id="toggleSwitch6"
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div
+								id="automationMode"
+								style="display: none"
+							></div>
+						</div>
+						<!--/ Content -->
+						<!-- Footer -->
+						<footer class="content-footer footer bg-footer-theme">
+							<div class="container-xxl">
+								<div
+									class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column"
+								>
+									<div>
+										©
+										<script>
+											document.write(new Date().getFullYear())
+										</script>
+										, made with ❤️ by
+										<a
+											href="#"
+											target="_blank"
+											class="fw-medium"
+											>Kisnak Nugroho</a
+										>
+									</div>
+								</div>
+							</div>
+						</footer>
+						<!-- / Footer -->
+						<div class="content-backdrop fade"></div>
+					</div>
+					<!--/ Content wrapper -->
+				</div>
+				<!--/ Layout container -->
+			</div>
+		</div>
+		<!-- Overlay -->
+		<div class="layout-overlay layout-menu-toggle"></div>
+
+		<!-- Drag Target Area To SlideIn Menu On Small Screens -->
+		<div class="drag-target"></div>
+
+		<!--/ Layout wrapper -->
+		<!-- Core JS -->
+		<!-- build:js assets/vendor/js/core.js -->
+
+		<script src="assets/vendor/libs/jquery/jquery.js"></script>
+		<script src="assets/vendor/libs/popper/popper.js"></script>
+		<script src="assets/vendor/js/bootstrap.js"></script>
+		<script src="assets/vendor/libs/node-waves/node-waves.js"></script>
+		<script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+		<script src="assets/vendor/libs/hammer/hammer.js"></script>
+		<script src="assets/vendor/libs/i18n/i18n.js"></script>
+		<script src="assets/vendor/libs/typeahead-js/typeahead.js"></script>
+		<script src="assets/vendor/js/menu.js"></script>
+
+		<!-- endbuild -->
+
+		<!-- Vendors JS -->
+		<script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
+		<script src="assets/vendor/libs/swiper/swiper.js"></script>
+		<script src="assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+		<script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+		<!-- Main JS -->
+		<script src="assets/js/main.js"></script>
+
+		<!-- Page JS -->
+		<script src="assets/js/dashboards-analytics.js"></script>
+		<script src="assets/js/extended-ui-perfect-scrollbar.js"></script>
+
+		<!-- firebase -->
+		<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+
+		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+
+		<script>
+			// Your web app's Firebase configuration
+			// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+			var firebaseConfig = {
+				apiKey: 'AIzaSyBBdqKLIw0duGu79sYIvLWJxQtvcPZO5C0',
+				authDomain: 'smartlamp-automation.firebaseapp.com',
+				databaseURL:
+					'https://smartlamp-automation-default-rtdb.firebaseio.com/',
+				projectId: 'smartlamp-automation',
+				storageBucket: 'smartlamp-automation.appspot.com',
+				messagingSenderId: '537806196824',
+				appId: '1:537806196824:web:bb18fa178f2186645a3a2d',
+			}
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig)
+			// firebase.analytics();
+
+			// kamar
+			$(document).ready(function () {
+				var database = firebase.database()
+				var kamar
+				let objek = new Date()
+				let tahun = objek.getFullYear()
+				let bulan = objek.getMonth() + 1
+				let hari = objek.getDate()
+				let Tanggal = hari + '-' + bulan + '-' + tahun
+				let Waktu = new Date().toLocaleTimeString().slice(0, 8)
+
+				var toggleSwitch = document.getElementById('toggleSwitch')
+
+				database.ref('kontrol').on('value', function (snap) {
+					dapur = snap.val().dapur
+					kamar = snap.val().kamar
+					kamar2 = snap.val().kamar2
+					ruangtamu = snap.val().ruangtamu
+					teras = snap.val().teras
+					toilet = snap.val().toilet
+
+					updateImageKamar()
+
+					// Update the toggle button state based on the Firebase value
+					toggleSwitch.checked = kamar === 'hidup'
+
+					// Update the toggle switch appearance based on the Firebase value
+					var slider = document.querySelector('.slider.round')
+					if (kamar === 'hidup') {
+						slider.style.backgroundColor = 'green' // Set the background color to green
+						slider.style.transform = 'translateX(20px)'
+					} else {
+						slider.style.backgroundColor = 'gray' // Set the background color to gray
+						slider.style.transform = 'translateX(0)'
+					}
+				})
+
+				function updateImageKamar() {
+					var imgElement = document.querySelector('.lampu-kamar')
+					if (kamar === 'hidup') {
+						imgElement.src = 'assets/img/illustrations/lampu-on.png'
+					} else {
+						imgElement.src = 'assets/img/illustrations/lampu-off.png'
+					}
+				}
+
+				// Add an event listener to the toggle button
+				document
+					.getElementById('toggleSwitch')
+					.addEventListener('change', function () {
+						var firebaseRef = firebase.database().ref('kontrol').child('kamar')
+
+						if (this.checked) {
+							// If the switch is checked (ON), set the Firebase value to "hidup"
+							firebaseRef.set('hidup')
+							kamar = 'hidup'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/kamar').set(kamar)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu kamar utama telah dihidupkan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						} else {
+							// If the switch is unchecked (OFF), set the Firebase value to "mati"
+							firebaseRef.set('mati')
+							kamar = 'mati'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/kamar').set(kamar)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu kamar utama telah dimatikan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						}
+						updateImageKamar()
+					})
+			})
+
+			// kamar2
+			$(document).ready(function () {
+				var database = firebase.database()
+				var kamar2
+				let objek = new Date()
+				let tahun = objek.getFullYear()
+				let bulan = objek.getMonth() + 1
+				let hari = objek.getDate()
+				let Tanggal = hari + '-' + bulan + '-' + tahun
+				let Waktu = new Date().toLocaleTimeString().slice(0, 8)
+
+				var toggleSwitch2 = document.getElementById('toggleSwitch2')
+
+				database.ref('kontrol').on('value', function (snap) {
+					dapur = snap.val().dapur
+					kamar = snap.val().kamar
+					kamar2 = snap.val().kamar2
+					ruangtamu = snap.val().ruangtamu
+					teras = snap.val().teras
+					toilet = snap.val().toilet
+
+					updateImageKamar2()
+					// Update the toggle button state based on the Firebase value
+					toggleSwitch2.checked = kamar2 === 'hidup'
+				})
+
+				function updateImageKamar2() {
+					var imgElement = document.querySelector('.lampu-kamar2')
+					if (kamar2 === 'hidup') {
+						imgElement.src = 'assets/img/illustrations/lampu-on.png'
+					} else {
+						imgElement.src = 'assets/img/illustrations/lampu-off.png'
+					}
+				}
+
+				// Add an event listener to the toggle button
+				document
+					.getElementById('toggleSwitch2')
+					.addEventListener('change', function () {
+						var firebaseRef = firebase.database().ref('kontrol').child('kamar2')
+
+						if (this.checked) {
+							// If the switch is checked (ON), set the Firebase value to "hidup"
+							firebaseRef.set('hidup')
+							kamar2 = 'hidup'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/kamar2').set(kamar2)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu kamar kedua telah dihidupkan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						} else {
+							// If the switch is unchecked (OFF), set the Firebase value to "mati"
+							firebaseRef.set('mati')
+							kamar2 = 'mati'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/kamar2').set(kamar2)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu kamar kedua telah dimatikan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						}
+						updateImageKamar2()
+					})
+			})
+
+			// ruangtamu
+			$(document).ready(function () {
+				var database = firebase.database()
+				var ruangtamu
+				let objek = new Date()
+				let tahun = objek.getFullYear()
+				let bulan = objek.getMonth() + 1
+				let hari = objek.getDate()
+				let Tanggal = hari + '-' + bulan + '-' + tahun
+				let Waktu = new Date().toLocaleTimeString().slice(0, 8)
+
+				var toggleSwitch2 = document.getElementById('toggleSwitch2')
+
+				database.ref('kontrol').on('value', function (snap) {
+					dapur = snap.val().dapur
+					kamar = snap.val().kamar
+					kamar2 = snap.val().kamar2
+					ruangtamu = snap.val().ruangtamu
+					teras = snap.val().teras
+					toilet = snap.val().toilet
+
+					updateImageTamu()
+					// Update the toggle button state based on the Firebase value
+					toggleSwitch3.checked = ruangtamu === 'hidup'
+				})
+
+				function updateImageTamu() {
+					var imgElement = document.querySelector('.lampu-tamu')
+					if (ruangtamu === 'hidup') {
+						imgElement.src = 'assets/img/illustrations/lampu-on.png'
+					} else {
+						imgElement.src = 'assets/img/illustrations/lampu-off.png'
+					}
+				}
+
+				// Add an event listener to the toggle button
+				document
+					.getElementById('toggleSwitch3')
+					.addEventListener('change', function () {
+						var firebaseRef = firebase
+							.database()
+							.ref('kontrol')
+							.child('ruangtamu')
+
+						if (this.checked) {
+							// If the switch is checked (ON), set the Firebase value to "hidup"
+							firebaseRef.set('hidup')
+							ruangtamu = 'hidup'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/ruangtamu').set(ruangtamu)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu ruang tamu telah dihidupkan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						} else {
+							// If the switch is unchecked (OFF), set the Firebase value to "mati"
+							firebaseRef.set('mati')
+							ruangtamu = 'mati'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/ruangtamu').set(ruangtamu)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu ruang tamu telah dimatikan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						}
+						updateImageTamu()
+					})
+			})
+
+			// teras
+			$(document).ready(function () {
+				var database = firebase.database()
+				var teras
+				let objek = new Date()
+				let tahun = objek.getFullYear()
+				let bulan = objek.getMonth() + 1
+				let hari = objek.getDate()
+				let Tanggal = hari + '-' + bulan + '-' + tahun
+				let Waktu = new Date().toLocaleTimeString().slice(0, 8)
+
+				var toggleSwitch4 = document.getElementById('toggleSwitch4')
+
+				database.ref('kontrol').on('value', function (snap) {
+					dapur = snap.val().dapur
+					kamar = snap.val().kamar
+					kamar2 = snap.val().kamar2
+					ruangtamu = snap.val().ruangtamu
+					teras = snap.val().teras
+					toilet = snap.val().toilet
+
+					updateImageTeras()
+					// Update the toggle button state based on the Firebase value
+					toggleSwitch4.checked = teras === 'hidup'
+				})
+
+				function updateImageTeras() {
+					var imgElement = document.querySelector('.lampu-teras')
+					if (teras === 'hidup') {
+						imgElement.src = 'assets/img/illustrations/lampu-on.png'
+					} else {
+						imgElement.src = 'assets/img/illustrations/lampu-off.png'
+					}
+				}
+
+				// Add an event listener to the toggle button
+				document
+					.getElementById('toggleSwitch4')
+					.addEventListener('change', function () {
+						var firebaseRef = firebase.database().ref('kontrol').child('teras')
+
+						if (this.checked) {
+							// If the switch is checked (ON), set the Firebase value to "hidup"
+							firebaseRef.set('hidup')
+							teras = 'hidup'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/teras').set(teras)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu teras telah dihidupkan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						} else {
+							// If the switch is unchecked (OFF), set the Firebase value to "mati"
+							firebaseRef.set('mati')
+							teras = 'mati'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/teras').set(teras)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu teras telah dimatikan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						}
+						updateImageTeras()
+					})
+			})
+
+			// dapur
+			$(document).ready(function () {
+				var database = firebase.database()
+				var dapur
+				let objek = new Date()
+				let tahun = objek.getFullYear()
+				let bulan = objek.getMonth() + 1
+				let hari = objek.getDate()
+				let Tanggal = hari + '-' + bulan + '-' + tahun
+				let Waktu = new Date().toLocaleTimeString().slice(0, 8)
+
+				var toggleSwitch5 = document.getElementById('toggleSwitch5')
+
+				database.ref('kontrol').on('value', function (snap) {
+					dapur = snap.val().dapur
+					kamar = snap.val().kamar
+					kamar2 = snap.val().kamar2
+					ruangtamu = snap.val().ruangtamu
+					teras = snap.val().teras
+					toilet = snap.val().toilet
+
+					updateImageDapur()
+					// Update the toggle button state based on the Firebase value
+					toggleSwitch5.checked = dapur === 'hidup'
+				})
+
+				function updateImageDapur() {
+					var imgElement = document.querySelector('.lampu-dapur')
+					if (dapur === 'hidup') {
+						imgElement.src = 'assets/img/illustrations/lampu-on.png'
+					} else {
+						imgElement.src = 'assets/img/illustrations/lampu-off.png'
+					}
+				}
+				// Add an event listener to the toggle button
+				document
+					.getElementById('toggleSwitch5')
+					.addEventListener('change', function () {
+						var firebaseRef = firebase.database().ref('kontrol').child('dapur')
+
+						if (this.checked) {
+							// If the switch is checked (ON), set the Firebase value to "hidup"
+							firebaseRef.set('hidup')
+							dapur = 'hidup'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/dapur').set(dapur)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu dapur telah dihidupkan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						} else {
+							// If the switch is unchecked (OFF), set the Firebase value to "mati"
+							firebaseRef.set('mati')
+							dapur = 'mati'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/dapur').set(dapur)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu dapur telah dimatikan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						}
+						updateImageDapur()
+					})
+			})
+
+			// toilet
+			$(document).ready(function () {
+				var database = firebase.database()
+				var toilet
+				let objek = new Date()
+				let tahun = objek.getFullYear()
+				let bulan = objek.getMonth() + 1
+				let hari = objek.getDate()
+				let Tanggal = hari + '-' + bulan + '-' + tahun
+				let Waktu = new Date().toLocaleTimeString().slice(0, 8)
+
+				var toggleSwitch6 = document.getElementById('toggleSwitch6')
+
+				database.ref('kontrol').on('value', function (snap) {
+					dapur = snap.val().dapur
+					kamar = snap.val().kamar
+					kamar2 = snap.val().kamar2
+					ruangtamu = snap.val().ruangtamu
+					teras = snap.val().teras
+					toilet = snap.val().toilet
+
+					updateImageToilet()
+					// Update the toggle button state based on the Firebase value
+					toggleSwitch6.checked = toilet === 'hidup'
+				})
+
+				function updateImageToilet() {
+					var imgElement = document.querySelector('.lampu-toilet')
+					if (toilet === 'hidup') {
+						imgElement.src = 'assets/img/illustrations/lampu-on.png'
+					} else {
+						imgElement.src = 'assets/img/illustrations/lampu-off.png'
+					}
+				}
+
+				// Add an event listener to the toggle button
+				document
+					.getElementById('toggleSwitch6')
+					.addEventListener('change', function () {
+						var firebaseRef = firebase.database().ref('kontrol').child('toilet')
+
+						if (this.checked) {
+							// If the switch is checked (ON), set the Firebase value to "hidup"
+							firebaseRef.set('hidup')
+							toilet = 'hidup'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/toilet').set(toilet)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu toilet telah dihidupkan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						} else {
+							// If the switch is unchecked (OFF), set the Firebase value to "mati"
+							firebaseRef.set('mati')
+							toilet = 'mati'
+							var key = database.ref().child('Data').push().key
+							database.ref('history/' + key + '/toilet').set(toilet)
+							database.ref('history/' + key + '/Tanggal').set(Tanggal)
+							database.ref('history/' + key + '/Waktu').set(Waktu)
+
+							// show notification
+							iziToast.success({
+								title: 'Success',
+								message: 'Lampu toilet telah dimatikan',
+								position: 'topRight',
+							})
+
+							// refresh
+							setTimeout(() => {
+								location.reload()
+							}, 3000)
+						}
+						updateImageToilet()
+					})
+			})
+
+			function toggleMode() {
+				var manualMode = document.getElementById('manualMode')
+				var automationMode = document.getElementById('automationMode')
+				var mode = document.querySelector('input[name="mode"]:checked').value
+
+				// Ambil semua elemen toggle switch
+				var toggleSwitches = document.querySelectorAll('.form-check-input')
+
+				if (mode === 'manual') {
+					manualMode.style.display = 'block'
+					automationMode.style.display = 'none'
+
+					// Aktifkan semua toggle switch
+					toggleSwitches.forEach(function (toggleSwitch) {
+						toggleSwitch.disabled = false
+					})
+				} else if (mode === 'automation') {
+					manualMode.style.display = 'block'
+					automationMode.style.display = 'block'
+
+					// Nonaktifkan semua toggle switch
+					toggleSwitches.forEach(function (toggleSwitch) {
+						toggleSwitch.disabled = true
+					})
+				}
+
+				// Simpan mode yang dipilih ke Firebase Realtime Database pada path "kontrol"
+				var database = firebase.database()
+				var kontrolRef = database.ref('kontrol')
+
+				// Update hanya properti "mode" di bawah "kontrol"
+				kontrolRef.update({
+					mode: mode,
+				})
+			}
+
+			// Function untuk memeriksa mode yang telah disimpan di Firebase
+			function checkStoredMode() {
+				var database = firebase.database()
+				var kontrolRef = database.ref('kontrol')
+
+				// Mendapatkan data mode dari Firebase
+				kontrolRef.once('value').then(function (snapshot) {
+					var storedMode = snapshot.val().mode
+					if (storedMode === 'manual') {
+						document.getElementById('manualRadio').checked = true
+					} else if (storedMode === 'automation') {
+						document.getElementById('automationRadio').checked = true
+					}
+					toggleMode() // Panggil fungsi toggleMode untuk menampilkan konten yang sesuai
+				})
+			}
+
+			// Panggil fungsi checkStoredMode saat halaman dimuat
+			window.onload = checkStoredMode
+		</script>
+	</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html
+	lang="en"
+	class="light-style layout-wide customizer-hide"
+	dir="ltr"
+	data-theme="theme-default"
+	data-assets-path="assets/"
+	data-template="horizontal-menu-template"
+>
+	<!-- Mirrored from demos.pixinvent.com/vuexy-html-admin-template/html/horizontal-menu-template/auth-login-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Dec 2023 06:59:11 GMT -->
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+		/>
+
+		<title>Smart Lamp | Login</title>
+
+		<meta
+			name="description"
+			content="Start your development with a Dashboard for Bootstrap 5"
+		/>
+		<meta
+			name="keywords"
+			content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5"
+		/>
+
+		<!-- Favicon -->
+		<link
+			rel="icon"
+			type="image/x-icon"
+			href="https://demos.pixinvent.com/vuexy-html-admin-template/assets/img/favicon/favicon.ico"
+		/>
+
+		<!-- Fonts -->
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com/"
+		/>
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com/"
+			crossorigin
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Icons -->
+		<link
+			rel="stylesheet"
+			href="assets/vendor/fonts/fontawesome.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/fonts/tabler-icons.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/fonts/flag-icons.css"
+		/>
+
+		<!-- cdn -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase.js"></script>
+
+		<!-- iziToast CSS -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
+		/>
+
+		<!-- iziToast JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+
+		<!-- Core CSS -->
+		<link
+			rel="stylesheet"
+			href="assets/vendor/css/rtl/core.css"
+			class="template-customizer-core-css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/css/rtl/theme-default.css"
+			class="template-customizer-theme-css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/css/demo.css"
+		/>
+
+		<!-- Vendors CSS -->
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/node-waves/node-waves.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/typeahead-js/typeahead.css"
+		/>
+		<!-- Vendor -->
+		<link
+			rel="stylesheet"
+			href="assets/vendor/libs/%40form-validation/umd/styles/index.min.css"
+		/>
+
+		<!-- Page CSS -->
+		<!-- Page -->
+		<link
+			rel="stylesheet"
+			href="assets/vendor/css/pages/page-auth.css"
+		/>
+
+		<!-- Helpers -->
+		<script src="assets/vendor/js/helpers.js"></script>
+
+		<script src="assets/js/login.js"></script>
+		<script src="assets/vendor/js/template-customizer.js"></script>
+		<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+		<script src="assets/js/config.js"></script>
+
+		<script>
+			// Check if the user is authenticated
+			firebase.auth().onAuthStateChanged(function (user) {
+				if (user) {
+					// User is signed in, redirect to home.html
+					window.location.href = 'index.html'
+				} else {
+					// User is not signed in, stay on the login page
+					console.log('User is not signed in. Stay on the login page.')
+				}
+			})
+		</script>
+		<style>
+			.google-sign-in-button {
+				cursor: pointer;
+				transition: background-color 0.3s, box-shadow 0.3s;
+
+				padding: 12px 16px 12px 42px;
+				border: none;
+				border-radius: 3px;
+				box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+
+				color: #757575;
+				font-size: 14px;
+				font-weight: 500;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+					Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+					sans-serif;
+
+				background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+				background-color: white;
+				background-repeat: no-repeat;
+				background-position: 12px 11px;
+			}
+
+			.google-sign-in-button:hover {
+				box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+			}
+
+			.google-sign-in-button:active {
+				background-color: #eeeeee;
+			}
+
+			.google-sign-in-button:active {
+				outline: none;
+				box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
+					0 0 0 3px #c8dafc;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Content -->
+
+		<div class="authentication-wrapper authentication-cover authentication-bg">
+			<div class="authentication-inner row">
+				<!-- /Left Text -->
+				<div class="d-none d-lg-flex col-lg-7 p-0">
+					<div
+						class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center flex-column"
+					>
+						<img
+							src="https://static.vecteezy.com/system/resources/previews/008/324/394/original/smart-home-system-concept-free-vector.jpg"
+							alt="auth-login-cover"
+							class="img-fluid my-5 auth-illustration"
+						/>
+
+						<p class="text-center">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Perferendis eos voluptate iusto tenetur et fugiat esse quidem.
+							Earum ipsa vel facere necessitatibus. Placeat distinctio
+							voluptatibus corporis non. Quaerat, sed temporibus.
+						</p>
+					</div>
+				</div>
+				<!-- /Left Text -->
+
+				<!-- Login -->
+				<div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4">
+					<div class="w-px-400 mx-auto">
+						<!-- Logo -->
+						<div class="app-brand mb-4">
+							<a
+								href="index.html"
+								class="app-brand-link gap-2"
+							>
+								<span class="app-brand-logo demo">
+									<svg
+										width="32"
+										height="22"
+										viewBox="0 0 32 22"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
+											fill="#7367F0"
+										/>
+										<path
+											opacity="0.06"
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
+											fill="#161616"
+										/>
+										<path
+											opacity="0.06"
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
+											fill="#161616"
+										/>
+										<path
+											fill-rule="evenodd"
+											clip-rule="evenodd"
+											d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
+											fill="#7367F0"
+										/>
+									</svg>
+								</span>
+							</a>
+						</div>
+						<!-- /Logo -->
+						<h3 class="mb-1 text-center">Welcome to Smart Lamp System</h3>
+						<p class="mb-4 text-center">
+							Please sign-in to your account and start the future
+						</p>
+
+						<form
+							id="login-form"
+							class="mb-3"
+							action="https://demos.pixinvent.com/vuexy-html-admin-template/html/horizontal-menu-template-dark/index.html"
+							method="POST"
+						>
+							<div class="mb-3">
+								<label
+									for="email"
+									class="form-label"
+									>Email</label
+								>
+								<input
+									type="email"
+									class="form-control"
+									id="email"
+									placeholder="Enter your email"
+									autofocus
+								/>
+							</div>
+							<div class="mb-3 form-password-toggle">
+								<div class="d-flex justify-content-between">
+									<label
+										class="form-label"
+										for="password"
+										>Password</label
+									>
+								</div>
+								<div class="input-group input-group-merge">
+									<input
+										type="password"
+										id="password"
+										class="form-control"
+										placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+										aria-describedby="password"
+									/>
+									<span class="input-group-text cursor-pointer"
+										><i class="ti ti-eye-off"></i
+									></span>
+								</div>
+							</div>
+							<button
+								class="btn btn-primary d-grid w-100"
+								type="submit"
+								onclick="signIn()"
+							>
+								Sign in
+							</button>
+						</form>
+
+						<!-- Modal -->
+						<div
+							class="modal fade"
+							id="registrationModal"
+							tabindex="-1"
+							role="dialog"
+							aria-labelledby="registrationModalLabel"
+							aria-hidden="true"
+						>
+							<div
+								class="modal-dialog"
+								role="document"
+							>
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5
+											class="modal-title"
+											id="registrationModalLabel"
+										>
+											Registrasi Pengguna Baru
+										</h5>
+										<button
+											type="button"
+											class="close"
+											data-dismiss="modal"
+											aria-label="Close"
+										>
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<!-- Form untuk registrasi -->
+										<form id="registrationForm">
+											<div class="form-group">
+												<label for="registrationEmail">Email</label>
+												<input
+													type="email"
+													class="form-control"
+													id="registrationEmail"
+													required
+												/>
+											</div>
+											<div class="form-group">
+												<label for="registrationPassword">Password</label>
+												<input
+													type="password"
+													class="form-control"
+													id="registrationPassword"
+													required
+												/>
+											</div>
+											<!-- Tambahkan input tambahan yang Anda butuhkan, seperti nama pengguna -->
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button
+											type="button"
+											class="btn btn-secondary"
+											data-dismiss="modal"
+										>
+											Tutup
+										</button>
+										<button
+											type="button"
+											class="btn btn-primary"
+											onclick="registerUser()"
+										>
+											Daftar
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="divider my-4">
+							<div class="divider-text">or</div>
+						</div>
+
+						<div class="d-flex justify-content-center">
+							<button
+								type="button"
+								class="btn btn-lg btn-block btn-outline google-sign-in-button"
+								onclick="googleLogin()"
+							>
+								Continue with Google
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- /Login -->
+			</div>
+		</div>
+
+		<!-- / Content -->
+
+		<!-- Core JS -->
+		<!-- build:js assets/vendor/js/core.js -->
+
+		<script src="assets/vendor/libs/jquery/jquery.js"></script>
+		<script src="assets/vendor/libs/popper/popper.js"></script>
+		<script src="assets/vendor/js/bootstrap.js"></script>
+		<script src="assets/vendor/libs/node-waves/node-waves.js"></script>
+		<script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+		<script src="assets/vendor/libs/hammer/hammer.js"></script>
+		<script src="assets/vendor/libs/i18n/i18n.js"></script>
+		<script src="assets/vendor/libs/typeahead-js/typeahead.js"></script>
+		<script src="assets/vendor/js/menu.js"></script>
+
+		<!-- endbuild -->
+
+		<!-- Vendors JS -->
+		<script src="assets/vendor/libs/%40form-validation/umd/bundle/popular.min.js"></script>
+		<script src="assets/vendor/libs/%40form-validation/umd/plugin-bootstrap5/index.min.js"></script>
+		<script src="assets/vendor/libs/%40form-validation/umd/plugin-auto-focus/index.min.js"></script>
+
+		<!-- Main JS -->
+		<script src="assets/js/main.js"></script>
+
+		<!-- Page JS -->
+		<script src="assets/js/pages-auth.js"></script>
+
+		<script>
+			// Your web app's Firebase configuration
+			// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+			var firebaseConfig = {
+				apiKey: 'AIzaSyBBdqKLIw0duGu79sYIvLWJxQtvcPZO5C0',
+				authDomain: 'smartlamp-automation.firebaseapp.com',
+				databaseURL: 'https://smartlamp-automation-default-rtdb.firebaseio.com',
+				projectId: 'smartlamp-automation',
+				storageBucket: 'smartlamp-automation.appspot.com',
+				messagingSenderId: '537806196824',
+				appId: '1:537806196824:web:bb18fa178f2186645a3a2d',
+			}
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig)
+			// firebase.analytics();
+		</script>
+
+		<script>
+			var loginForm = document.getElementById('login-form')
+			loginForm.addEventListener('submit', function (e) {
+				e.preventDefault()
+			})
+		</script>
+	</body>
+
+	<!-- Mirrored from demos.pixinvent.com/vuexy-html-admin-template/html/horizontal-menu-template/auth-login-cover.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Dec 2023 06:59:12 GMT -->
+</html>
+
+<!-- beautify ignore:end -->
